@@ -1,0 +1,47 @@
+.task {
+  background-color: #252F88;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+  height: 6.25rem;
+  padding: 1rem;
+  transition: height 0.3s linear;
+}
+
+.task:hover {
+  height: 8rem;
+}
+
+.task__container {
+  text-align: right;
+  direction: rtl;
+}
+
+.task__title {
+  margin-bottom: 0.5rem;
+}
+
+.task__desc {
+  opacity: 0.8;
+  line-height: 1.5rem;
+}
+
+.icons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.unComplete {
+  background-color: #C1D69F;
+  color: "#fff";
+}
+
+.done {
+  background-color: "#fff";
+  color: #C1D69F;
+}

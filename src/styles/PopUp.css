@@ -1,0 +1,64 @@
+.overlay {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay__container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.overlay__title {
+  margin-bottom: 2rem;
+  direction: rtl;
+}
+
+.overlay__desc,
+.overlay__input {
+  margin-bottom: 2rem;
+  direction: rtl;
+}
+
+.overlay__input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.overlay__input input {
+  min-width: 25rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ccc;
+  line-height: 2rem;
+}
+
+.overlay__input input:focus {
+  border-bottom: 1px solid red;
+}
+
+.overlay__input p {
+  direction: ltr;
+  font-size: 0.7rem;
+  color: #a6a6a6;
+}
+
+.overlay__desc h3 {
+  margin-bottom: 1rem;
+}
+
+.overlay__desc p {
+  color: #a6a6a6;
+}
