@@ -5,82 +5,55 @@ import "../styles/PopUp.css";
 
 // ---------------------------------------------
 
-const EditPopUp = ({type}) => {
-  const { id, tasks, setTasks, doneTasks,allTasks, setDoneTasks, setShowEdit } = TasksProvider();
+const EditPopUp = () => {
+  const {id, tasks, setTasks, doneTasks, allTasks, setDoneTasks, setShowEdit} =
+    TasksProvider();
 
   let current;
-  if (type === "tasks") {
+
+  let status = allTasks.filter((task) => {
+    return task.id === id;
+  });
+  status = status[0].done;
+  if (!status) {
     current = tasks.find((task) => {
       return task.id === id;
     });
-  } else if (type === "doneTasks") {
+  } else {
     current = doneTasks.find((task) => {
       return task.id === id;
     });
-  } else {
-    let status = allTasks.filter((task) => {
-      return task.id === id;
-    });
-    status = status[0].done;
-    if (!status) {
-      current = tasks.find((task) => {
-        return task.id === id;
-      });
-    } else {
-      current = doneTasks.find((task) => {
-        return task.id === id;
-      });
-    }
   }
-  
+
   const [editTask, setEditTask] = useState({
     id: id,
     title: current.title,
     desc: current.desc,
+    done: current.done,
   });
 
   function handlePopUp(action) {
     if (action) {
-      if (type === "tasks") {
+      let status = allTasks.filter((task) => {
+        return task.id === id;
+      });
+      status = status[0].done;
+      if (!status) {
         const newTasks = tasks.map((task) => {
           if (task.id === id) {
-            return {...task, title: editTask.title, desc: editTask.desc};
+            return editTask;
           }
           return task;
         });
         setTasks(newTasks);
-      } else if (type === "doneTasks") {
-        console.log(type);
-        console.log(doneTasks);
+      } else {
         const newTasks = doneTasks.map((task) => {
           if (task.id === id) {
-            return {...task, title: editTask.title, desc: editTask.desc};
+            return editTask;
           }
           return task;
         });
         setDoneTasks(newTasks);
-      } else {
-        let status = allTasks.filter((task) => {
-          return task.id === id;
-        });
-        status = status[0].done;
-        if (!status) {
-          const newTasks = tasks.map((task) => {
-            if (task.id === id) {
-              return {...task, title: editTask.title, desc: editTask.desc};
-            }
-            return task;
-          });
-          setTasks(newTasks);
-        } else {
-          const newTasks = doneTasks.map((task) => {
-            if (task.id === id) {
-              return {...task, title: editTask.title, desc: editTask.desc};
-            }
-            return task;
-          });
-          setDoneTasks(newTasks);
-        }
       }
     }
     setShowEdit(false);
@@ -118,18 +91,10 @@ const EditPopUp = ({type}) => {
             </label>
           </div>
           <div className="overlay__actions">
-            <Button
-              variant="text"
-              style={{color: "red", fontSize: "1.1rem", fontWeight: "bold"}}
-              onClick={() => handlePopUp(true)}
-            >
+            <Button variant="text" onClick={() => handlePopUp(true)}>
               تعديل
             </Button>
-            <Button
-              variant="text"
-              style={{color: "red", fontSize: "1.1rem", fontWeight: "bold"}}
-              onClick={() => handlePopUp(false)}
-            >
+            <Button variant="text" onClick={() => handlePopUp(false)}>
               إلغاء
             </Button>
           </div>

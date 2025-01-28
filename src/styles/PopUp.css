@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .overlay__container {
@@ -20,6 +21,12 @@
 .overlay__title {
   margin-bottom: 2rem;
   direction: rtl;
+}
+
+.overlay__actions button {
+  color: red;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 .overlay__desc,

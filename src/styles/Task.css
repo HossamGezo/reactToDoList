@@ -36,12 +36,18 @@
   gap: 0.5rem;
 }
 
-.unComplete {
+.icons svg {
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.icons .unComplete {
   background-color: #C1D69F;
   color: "#fff";
 }
 
-.done {
-  background-color: "#fff";
+.icons .done {
   color: #C1D69F;
 }

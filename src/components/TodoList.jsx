@@ -1,12 +1,12 @@
-import Tasks from "./Tasks";
-import "../styles/TodoList.css";
 import Button from "@mui/material/Button";
+import "../styles/TodoList.css";
+import Tasks from "./Tasks";
 import {useState} from "react";
-import { TasksProvider } from "../App";
+import {TasksProvider} from "../App";
 
 const TodoList = () => {
-  const [inputTask, setInputTask] = useState("");
   const {setTasks} = TasksProvider();
+  const [inputTask, setInputTask] = useState("");
   const [controlTabs, setControlTabs] = useState({
     allTasks: false,
     doneTasks: false,
@@ -18,6 +18,7 @@ const TodoList = () => {
       ...prev,
       {id: crypto.randomUUID(), title: "", desc: inputTask},
     ]);
+    setInputTask("");
   };
 
   function activeTabs(e) {
@@ -67,9 +68,9 @@ const TodoList = () => {
               غير منجز
             </li>
           </ul>
-          {controlTabs.allTasks && <Tasks order="allTasks"/>}
-          {controlTabs.doneTasks && <Tasks order="doneTasks"/>}
-          {controlTabs.tasks && <Tasks order="tasks"/>}
+          {controlTabs.allTasks && <Tasks order="allTasks" />}
+          {controlTabs.doneTasks && <Tasks order="doneTasks" />}
+          {controlTabs.tasks && <Tasks order="tasks" />}
           <div className="actions">
             <Button
               variant="contained"
@@ -88,6 +89,7 @@ const TodoList = () => {
                 required
                 value={inputTask}
                 onChange={(e) => setInputTask(e.target.value)}
+                onKeyUp={(e) => e.key === "Enter" && addTask()}
               />
               <p className="input__placeholder">عنوان المهمة</p>
             </div>

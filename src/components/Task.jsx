@@ -18,7 +18,6 @@ const Task = ({task}) => {
   } = TasksProvider();
 
   const handleDelete = (id) => {
-    console.log("delete");
     setShowDel(true);
     setId(id);
   };
@@ -37,10 +36,10 @@ const Task = ({task}) => {
         return task.id === id;
       });
       completeTask[0].done = true;
-      setDoneTasks((prev) => ([...prev, ...completeTask]));
+      setDoneTasks((prev) => [...prev, ...completeTask]);
       const newTasks = tasks.filter((task) => {
         return task.id !== id;
-      })
+      });
       setTasks(newTasks);
     } else if (
       e.target.tagName === "path" &&
@@ -50,7 +49,7 @@ const Task = ({task}) => {
         return task.id === id;
       });
       unCompleteTask[0].done = false;
-      setTasks((prev) => ([...prev, ...unCompleteTask]));
+      setTasks((prev) => [...prev, ...unCompleteTask]);
       const newDoneTasks = doneTasks.filter((task) => {
         return task.id !== id;
       });
@@ -68,31 +67,18 @@ const Task = ({task}) => {
         <div className="icons">
           <DeleteOutlineIcon
             style={{
-              backgroundColor: "#fff",
               color: "#9A163D",
-              borderRadius: "50%",
-              cursor: "pointer",
-              fontSize: "2rem",
             }}
             onClick={() => handleDelete(task.id)}
           />
           <EditRoundedIcon
             style={{
-              backgroundColor: "#fff",
               color: "#6A9AC0",
-              borderRadius: "50%",
-              cursor: "pointer",
-              fontSize: "2rem",
             }}
             onClick={() => handleEdit(task.id)}
           />
           <CheckCircleRoundedIcon
             className={task.done ? "done" : "unComplete"}
-            style={{
-              borderRadius: "50%",
-              cursor: "pointer",
-              fontSize: "2rem",
-            }}
             onClick={(e) => handleDone(task.id, e)}
           />
         </div>
