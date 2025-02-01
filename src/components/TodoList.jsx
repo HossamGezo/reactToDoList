@@ -21,8 +21,6 @@ const TodoList = () => {
     setTab(index);
   }
 
-  console.log(Boolean(inputTask))
-
   return (
     <>
       <div className="container">
@@ -51,7 +49,7 @@ const TodoList = () => {
           <Tasks order={tab} />
           <div className="actions">
             <Button
-              disabled = {inputTask ? false : true}
+              disabled={inputTask ? false : true}
               variant="contained"
               style={{
                 backgroundColor: "#9A163D",
