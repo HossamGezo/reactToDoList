@@ -7,54 +7,21 @@ import {TasksProvider} from "../App";
 const TodoList = () => {
   const {setTasks} = TasksProvider();
   const [inputTask, setInputTask] = useState("");
-  const [controlTabs, setControlTabs] = useState({
-    allTasks: false,
-    doneTasks: false,
-    tasks: true,
-  });
+  const [tab, setTab] = useState(1);
 
   const addTask = () => {
     setTasks((prev) => [
       ...prev,
-      {id: crypto.randomUUID(), title: "", desc: inputTask},
+      {id: crypto.randomUUID(), title: "", desc: inputTask, done: false},
     ]);
     setInputTask("");
   };
 
-  function activeTabs(e) {
-    const eles = document.querySelectorAll(".tabs li");
-    eles.forEach((ele) => {
-      ele.classList.remove("active");
-    });
-    e.target.classList.add("active");
+  function handleTabs(index) {
+    setTab(index);
   }
 
-  function handleAllTasks(e) {
-    setControlTabs({
-      allTasks: true,
-      doneTasks: false,
-      tasks: false,
-    });
-    activeTabs(e);
-  }
-
-  function handleDoneTaks(e) {
-    setControlTabs({
-      allTasks: false,
-      doneTasks: true,
-      tasks: false,
-    });
-    activeTabs(e);
-  }
-
-  function handleTasks(e) {
-    setControlTabs({
-      allTasks: false,
-      doneTasks: false,
-      tasks: true,
-    });
-    activeTabs(e);
-  }
+  console.log(Boolean(inputTask))
 
   return (
     <>
@@ -62,17 +29,29 @@ const TodoList = () => {
         <div className="todolist">
           <h1 className="todolist__title">مهامي</h1>
           <ul className="tabs">
-            <li onClick={handleAllTasks}>الكل</li>
-            <li onClick={handleDoneTaks}>منجز</li>
-            <li className="active" onClick={handleTasks}>
+            <li
+              onClick={() => handleTabs(3)}
+              className={tab === 3 ? "active" : " "}
+            >
+              الكل
+            </li>
+            <li
+              onClick={() => handleTabs(2)}
+              className={tab === 2 ? "active" : " "}
+            >
+              منجز
+            </li>
+            <li
+              onClick={() => handleTabs(1)}
+              className={tab === 1 ? "active" : " "}
+            >
               غير منجز
             </li>
           </ul>
-          {controlTabs.allTasks && <Tasks order="allTasks" />}
-          {controlTabs.doneTasks && <Tasks order="doneTasks" />}
-          {controlTabs.tasks && <Tasks order="tasks" />}
+          <Tasks order={tab} />
           <div className="actions">
             <Button
+              disabled = {inputTask ? false : true}
               variant="contained"
               style={{
                 backgroundColor: "#9A163D",

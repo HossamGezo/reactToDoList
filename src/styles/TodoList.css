@@ -41,6 +41,13 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.actions button:disabled {
+  background-color: #ccc !important;
+  color: white;
+  cursor: pointer;
 }
 
 .input__container {

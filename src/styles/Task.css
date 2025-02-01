@@ -1,5 +1,10 @@
+.tasks {
+  max-height: 50vh;
+  overflow:scroll;
+}
+
 .task {
-  background-color: #252F88;
+  background-color: rgb(37, 47, 136);
   color: #ffffff;
   display: flex;
   flex-direction: row-reverse;
@@ -8,13 +13,14 @@
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
   gap: 1.5rem;
-  height: 6.25rem;
   padding: 1rem;
-  transition: height 0.3s linear;
+  transition: padding 0.2s linear, box-shadow 0.2s linear;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.4);
 }
 
 .task:hover {
-  height: 8rem;
+  padding-block: 1.7rem;
+  box-shadow: 0 7px 17px rgb(37, 47, 136, 0.7);
 }
 
 .task__container {
@@ -41,13 +47,14 @@
   border-radius: 50%;
   cursor: pointer;
   font-size: 2rem;
+  padding: 1px;
 }
 
 .icons .unComplete {
-  background-color: #C1D69F;
   color: "#fff";
+  background-color: #8bc34a;
 }
 
 .icons .done {
-  color: #C1D69F;
+  color: #8bc34a;
 }

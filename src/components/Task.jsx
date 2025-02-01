@@ -1,8 +1,8 @@
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import CheckCIcon from "@mui/icons-material/CheckCircleRounded";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "../styles/Task.css";
 import {TasksProvider} from "../App";
+import { ModeEditOutlineOutlined } from "@mui/icons-material";
 
 // ----------------------------------------------------
 
@@ -27,11 +27,8 @@ const Task = ({task}) => {
     setId(id);
   };
 
-  const handleDone = (id, e) => {
-    if (
-      e.target.tagName === "path" &&
-      e.target.parentElement.classList.contains("unComplete")
-    ) {
+  const handleDone = (id) => {
+    if (!task.done) {
       let completeTask = tasks.filter((task) => {
         return task.id === id;
       });
@@ -41,10 +38,7 @@ const Task = ({task}) => {
         return task.id !== id;
       });
       setTasks(newTasks);
-    } else if (
-      e.target.tagName === "path" &&
-      e.target.parentElement.classList.contains("done")
-    ) {
+    } else {
       let unCompleteTask = doneTasks.filter((task) => {
         return task.id === id;
       });
@@ -61,25 +55,27 @@ const Task = ({task}) => {
     <>
       <div className="task">
         <div className="task__container">
-          <h3 className="task__title">{task.title}</h3>
-          <p className="task__desc">{task.desc}</p>
+          <h3 className="task__title" style={{textDecoration: task.done ? "line-through" : "none"}}>{task.title}</h3>
+          <p className="task__desc" style={{textDecoration: task.done ? "line-through" : "none"}}>{task.desc}</p>
         </div>
         <div className="icons">
           <DeleteOutlineIcon
             style={{
               color: "#9A163D",
+              border: "3px solid #9A163D"
             }}
             onClick={() => handleDelete(task.id)}
           />
-          <EditRoundedIcon
+          <ModeEditOutlineOutlined
             style={{
-              color: "#6A9AC0",
+              color: "#1768aa",
+              border: "3px solid #1768aa"
             }}
             onClick={() => handleEdit(task.id)}
           />
-          <CheckCircleRoundedIcon
+          <CheckCIcon
             className={task.done ? "done" : "unComplete"}
-            onClick={(e) => handleDone(task.id, e)}
+            onClick={() => handleDone(task.id)}
           />
         </div>
       </div>

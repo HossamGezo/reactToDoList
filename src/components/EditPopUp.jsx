@@ -9,52 +9,27 @@ const EditPopUp = () => {
   const {id, tasks, setTasks, doneTasks, allTasks, setDoneTasks, setShowEdit} =
     TasksProvider();
 
-  let current;
+  function editFunc(targetTask, setTargetTask) {
+    const newTasks = targetTask.map((task) => {
+      return task.id === id ? editTask : task;
+    });
+    setTargetTask ? setTasks(newTasks) : setDoneTasks(newTasks);
+  }
 
-  let status = allTasks.filter((task) => {
+  let current = allTasks.filter((task) => {
     return task.id === id;
   });
-  status = status[0].done;
-  if (!status) {
-    current = tasks.find((task) => {
-      return task.id === id;
-    });
-  } else {
-    current = doneTasks.find((task) => {
-      return task.id === id;
-    });
-  }
 
   const [editTask, setEditTask] = useState({
     id: id,
-    title: current.title,
-    desc: current.desc,
-    done: current.done,
+    title: current[0].title,
+    desc: current[0].desc,
+    done: current[0].done,
   });
 
   function handlePopUp(action) {
     if (action) {
-      let status = allTasks.filter((task) => {
-        return task.id === id;
-      });
-      status = status[0].done;
-      if (!status) {
-        const newTasks = tasks.map((task) => {
-          if (task.id === id) {
-            return editTask;
-          }
-          return task;
-        });
-        setTasks(newTasks);
-      } else {
-        const newTasks = doneTasks.map((task) => {
-          if (task.id === id) {
-            return editTask;
-          }
-          return task;
-        });
-        setDoneTasks(newTasks);
-      }
+      editTask.done ? editFunc(doneTasks, false) : editFunc(tasks, true);
     }
     setShowEdit(false);
   }
