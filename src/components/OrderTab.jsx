@@ -1,4 +1,4 @@
-import Task from "./task";
+import Task from "./Task";
 import DelPopUp from "./DelPopUp";
 import EditPopUp from "./EditPopUp";
 import {TasksProvider} from "../App";
