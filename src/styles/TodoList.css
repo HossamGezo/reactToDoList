@@ -28,12 +28,12 @@
 }
 
 .tabs li:hover {
-  background-color:#F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .tabs li.active {
-  background-color: #F8EDF0;
-  color: #A26372;
+  background-color: #f8edf0;
+  color: #a26372;
 }
 
 .actions {
@@ -61,13 +61,13 @@
   width: 100%;
   line-height: 1.7rem;
   padding: 0.65rem 0.2rem;
-  border: 2px solid #A6A6A6;
+  border: 2px solid #a6a6a6;
   border-radius: 0.25rem;
 }
 
 .input__container .input__placeholder {
   position: absolute;
-  color: #A6A6A6;
+  color: #a6a6a6;
   font-size: 0.8rem;
   top: 1rem;
   left: 0.5rem;
@@ -76,16 +76,15 @@
 
 .input__container input:focus,
 .input__container input:valid {
-  color: #9A163D;
-  border: 2px solid #9A163D;
+  color: #9a163d;
+  border: 2px solid #9a163d;
 }
 
 .input__container input:focus + .input__placeholder,
 .input__container input:valid + .input__placeholder {
   top: -0.4rem;
   background-color: white;
-  color: #9A163D;
+  color: #9a163d;
   padding: 0 0.4rem;
   scale: 0.88;
 }
-

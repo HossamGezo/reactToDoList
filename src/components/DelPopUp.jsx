@@ -1,31 +1,28 @@
 import "../styles/PopUp.css";
 import Button from "@mui/material/Button";
 import "../styles/PopUp.css";
-import {TasksProvider} from "../App";
+import {useTasksProvider} from "../context/TasksProvider";
 
-// ----------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const DelPopUp = () => {
-  const {id, setShowDel, tasks, setTasks, doneTasks, setDoneTasks, allTasks} =
-    TasksProvider();
+  const {currentTask, setShowDel, tasks, setTasks, doneTasks, setDoneTasks, notify} =
+    useTasksProvider();
 
   function handlePopUp(action) {
     if (action) {
-      let status = allTasks.filter((task) => {
-        return task.id === id;
-      });
-      status = status[0].done;
-      if (!status) {
+      if (!currentTask.done) {
         const newTasks = tasks.filter((task) => {
-          return task.id !== id;
+          return task.id !== currentTask.id;
         });
         setTasks(newTasks);
       } else {
         const newTasks = doneTasks.filter((task) => {
-          return task.id !== id;
+          return task.id !== currentTask.id;
         });
         setDoneTasks(newTasks);
       }
+      notify("تم الحذف بنجاح");
     }
     setShowDel(false);
   }

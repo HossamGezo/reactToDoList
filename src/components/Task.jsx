@@ -1,53 +1,50 @@
 import CheckCIcon from "@mui/icons-material/CheckCircleRounded";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import "../styles/Task.css";
-import {TasksProvider} from "../App";
+import {useTasksProvider} from "../context/TasksProvider";
 import {ModeEditOutlineOutlined} from "@mui/icons-material";
 
-// ----------------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const Task = ({task}) => {
   const {
-    setId,
+    setCurrentTask,
     setShowEdit,
     setShowDel,
     tasks,
     setTasks,
     doneTasks,
     setDoneTasks,
-  } = TasksProvider();
+    notify,
+  } = useTasksProvider();
 
-  const handleDelete = (id) => {
+  const handleDelete = () => {
     setShowDel(true);
-    setId(id);
+    setCurrentTask(task);
   };
 
-  const handleEdit = (id) => {
+  const handleEdit = () => {
     setShowEdit(true);
-    setId(id);
+    setCurrentTask(task);
   };
 
   const handleDone = (id) => {
     if (!task.done) {
-      let completeTask = tasks.filter((task) => {
-        return task.id === id;
-      });
-      completeTask[0].done = true;
-      setDoneTasks((prev) => [...prev, ...completeTask]);
+      task.done = true;
+      setDoneTasks((prev) => [...prev, task]);
       const newTasks = tasks.filter((task) => {
         return task.id !== id;
       });
       setTasks(newTasks);
+      notify("تمت الاضافه الي المهمات المكتمله");
     } else {
-      let unCompleteTask = doneTasks.filter((task) => {
-        return task.id === id;
-      });
-      unCompleteTask[0].done = false;
-      setTasks((prev) => [...prev, ...unCompleteTask]);
+      task.done = false;
+      setTasks((prev) => [...prev, task]);
       const newDoneTasks = doneTasks.filter((task) => {
         return task.id !== id;
       });
       setDoneTasks(newDoneTasks);
+      notify("تمت الاضافه الي المهمات غير المكتمله");
     }
   };
 

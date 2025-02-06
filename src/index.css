@@ -1,15 +1,18 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
-  background-color: #181A1C;
+  background-color: #181a1c;
   font-family: "Alexandria", serif;
 }
 
-input,button {
+input,
+button {
   font-family: inherit;
 }
 

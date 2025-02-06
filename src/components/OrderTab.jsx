@@ -1,11 +1,12 @@
 import Task from "./Task";
 import DelPopUp from "./DelPopUp";
 import EditPopUp from "./EditPopUp";
-import {TasksProvider} from "../App";
+import {useTasksProvider} from "../context/TasksProvider";
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const OrderTab = ({order}) => {
-  const {showEdit, showDel} = TasksProvider();
-
+  const {showEdit, showDel} = useTasksProvider();
   return (
     <>
       <div className="tasks">

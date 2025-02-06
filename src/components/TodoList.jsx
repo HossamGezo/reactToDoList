@@ -2,12 +2,16 @@ import Button from "@mui/material/Button";
 import "../styles/TodoList.css";
 import Tasks from "./Tasks";
 import {useState} from "react";
-import {TasksProvider} from "../App";
+import {useTasksProvider} from "../context/TasksProvider";
+import {Toaster} from "react-hot-toast";
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const TodoList = () => {
-  const {setTasks} = TasksProvider();
+  const {setTasks, notify} = useTasksProvider();
   const [inputTask, setInputTask] = useState("");
   const [tab, setTab] = useState(1);
+
 
   const addTask = () => {
     setTasks((prev) => [
@@ -15,6 +19,7 @@ const TodoList = () => {
       {id: crypto.randomUUID(), title: "", desc: inputTask, done: false},
     ]);
     setInputTask("");
+    notify("تم اضافه المهمه بنجاح");
   };
 
   function handleTabs(index) {
@@ -73,6 +78,16 @@ const TodoList = () => {
           </div>
         </div>
       </div>
+      <Toaster
+        position={"bottom-left"}
+        toastOptions={{
+          style: {
+            backgroundColor: "green",
+            color: "white",
+            width: "20px !important"
+          },
+        }}
+      />
     </>
   );
 };

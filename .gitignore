@@ -25,3 +25,6 @@ dist-ssr
 
 # Extra Files
 ProjectNotes.md
+Test.css
+Test.jsx
+TestReducer.jsx

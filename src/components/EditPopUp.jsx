@@ -1,35 +1,27 @@
 import Button from "@mui/material/Button";
 import {useState} from "react";
-import {TasksProvider} from "../App";
+import {useTasksProvider} from "../context/TasksProvider";
 import "../styles/PopUp.css";
 
-// ---------------------------------------------
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 const EditPopUp = () => {
-  const {id, tasks, setTasks, doneTasks, allTasks, setDoneTasks, setShowEdit} =
-    TasksProvider();
+  const {currentTask, tasks, setTasks, doneTasks, setDoneTasks, setShowEdit, notify} =
+    useTasksProvider();
 
   function editFunc(targetTask, setTargetTask) {
     const newTasks = targetTask.map((task) => {
-      return task.id === id ? editTask : task;
+      return task.id === currentTask.id ? editTask : task;
     });
     setTargetTask ? setTasks(newTasks) : setDoneTasks(newTasks);
   }
 
-  let current = allTasks.filter((task) => {
-    return task.id === id;
-  });
-
-  const [editTask, setEditTask] = useState({
-    id: id,
-    title: current[0].title,
-    desc: current[0].desc,
-    done: current[0].done,
-  });
+  const [editTask, setEditTask] = useState(currentTask);
 
   function handlePopUp(action) {
     if (action) {
       editTask.done ? editFunc(doneTasks, false) : editFunc(tasks, true);
+      notify("تم التعديل بنجاح");
     }
     setShowEdit(false);
   }
